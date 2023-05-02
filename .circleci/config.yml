@@ -1,0 +1,43 @@
+version: 2.1
+
+orbs:
+  php: circleci/php@1.1.0
+
+workflows:
+  build-workflow:
+    jobs:
+      - build-gsn:
+          filters: &filters
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
+      - build-image:
+          requires:
+            - build-gsn
+          filters: *filters
+
+jobs:
+  build-gsn:
+    executor: php/default
+    steps:
+      - checkout
+      - php/install-composer:
+          install-version: 1.10.16
+      - php/install-packages
+      - persist_to_workspace:
+          root: .
+          paths: .
+
+  build-image:
+    docker:
+      - image: cimg/base:2023.01
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - attach_workspace:
+          at: .
+      - run:
+          name: "build & publish"
+          command: |
+            echo "Add your docker build & publish step here"

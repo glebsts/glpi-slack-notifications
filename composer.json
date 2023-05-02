@@ -1,0 +1,18 @@
+{
+  "require": {
+    "php": ">=7.3",
+    "jolicode/slack-php-api": "4.3.0",
+    "nyholm/psr7": "^1.5",
+    "symfony/http-client": "^5.4"
+  },
+  "require-dev": {
+    "glpi-project/tools": "^0.4"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "platform": {
+      "php": "7.3.0"
+    },
+    "sort-packages": true
+  }
+}
